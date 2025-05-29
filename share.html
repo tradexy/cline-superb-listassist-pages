@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List Assist – Shared List</title>
+  <!-- Link to core styles (assuming core.css is copied to docs folder) -->
+  <link rel="stylesheet" type="text/css" href="core.css"> 
+  <!-- Optional: Add favicon -->
+  <link rel="icon" type="image/png" href="ebayGoodLogo-16x16.png"> 
+</head>
+<body>
+<div id="main-container">
+  <div class="content-box title-box">
+    <h1 id="title">Shared List</h1>
+  </div>
+  <div id="subtitleBox" class="content-box subtitle-box" style="display: none;">
+    <img id="subtitleImage" style="max-width: 100%; max-height: 200px; display: block; margin: 0 auto 15px;">
+    <div id="subtitleContent"></div>
+  </div>
+
+  <div class="content-box table-box">
+    <table id="share-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="sharedListBody">
+        <!-- Rows will be populated by share.js -->
+      </tbody>
+    </table>
+  </div>
+</div>
+  <script src="share.js"></script>
+  <style>
+    #share-table th {
+      background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 85%, black 15%) !important;
+      color: var(--user-text-color, var(--text-on-light)) !important;
+    }
+    #share-table a {
+      color: var(--user-text-color, var(--text-on-light)) !important;
+      text-decoration: underline !important;
+      font-style: italic !important;
+      position: relative;
+      padding-right: 24px;
+    }
+    #share-table a::after {
+      content: " 📋";
+      font-style: normal;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    #share-table a:hover::after {
+      opacity: 1;
+    }
+    .subtitle-box {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: var(--user-bg-color, var(--bg-on-light));
+      color: var(--user-text-color, var(--text-on-light));
+      font-size: 1.2em;
+      line-height: 1.5;
+    }
+    .subtitle-box.left {
+      text-align: left;
+    }
+    .subtitle-box.center {
+      text-align: center;
+    }
+    .subtitle-box.right {
+      text-align: right;
+    }
+    #subtitleImage {
+      max-width: 100%;
+      max-height: 200px;
+      display: block;
+      margin: 0 auto 15px;
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,331 @@
+/* cline-listassist/core.css */
+body {
+    font-family: var(--user-font-family, Arial, sans-serif);
+    background-color: var(--user-bg-color, #ffffff);
+    color: var(--user-text-color, #333333);
+    margin: 20px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Table styling to match share page */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 1em;
+    line-height: 1.5;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Dark Mode Styles - Overrides all theme colors */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode button {
+    background-color: #333 !important;
+    color: #ffffff !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode button:hover {
+    background-color: #444 !important;
+}
+
+body.dark-mode table {
+    border-color: #444 !important;
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #444 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode th {
+    background-color: #1e1e1e !important;
+}
+
+body.dark-mode tr:hover {
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode td {
+    color: #ffffff !important;
+}
+
+body.dark-mode a {
+    color: #82b1ff !important;
+}
+
+body.dark-mode a:hover {
+    color: #448aff !important;
+}
+
+/* Disable theme colors in dark mode */
+body.dark-mode {
+    --text-color: #ffffff !important;
+    --bg-color: #121212 !important;
+    --border-color: #444 !important;
+}
+
+/* Theme color adjustments */
+body {
+    --text-on-light: #333333;
+    --text-on-dark: #ffffff;
+    --bg-on-light: #ffffff;
+    --bg-on-dark: #121212;
+    --border-on-light: #dddddd;
+    --border-on-dark: #444444;
+}
+
+/* Apply theme colors */
+body:not(.dark-mode) {
+    background-color: var(--user-bg-color, var(--bg-on-light)) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+}
+
+body:not(.dark-mode) input,
+body:not(.dark-mode) textarea,
+body:not(.dark-mode) select {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 90%, black 10%) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+    border-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 70%, black 30%) !important;
+}
+
+body:not(.dark-mode) th {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 85%, black 15%) !important;
+}
+
+body:not(.dark-mode) button {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 80%, black 20%) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+    border-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 70%, black 30%) !important;
+}
+
+body:not(.dark-mode) button:hover {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 70%, black 30%) !important;
+}
+
+body:not(.dark-mode) table {
+    border-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 60%, black 40%) !important;
+}
+
+body:not(.dark-mode) th,
+body:not(.dark-mode) td {
+    border-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 60%, black 40%) !important;
+}
+
+/* Ensure share page matches list page styling */
+.share-page {
+    background-color: var(--user-bg-color, var(--bg-on-light)) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+}
+
+.share-page table th {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 85%, black 15%) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+}
+
+.share-page table {
+    border-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 60%, black 40%) !important;
+}
+
+.share-page table th,
+.share-page table td {
+    border-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 60%, black 40%) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+}
+
+/* Share page specific styling */
+#share-container {
+    background-color: var(--user-bg-color, var(--bg-on-light)) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+    padding: 20px;
+}
+
+#share-container table th {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 85%, black 15%) !important;
+    color: var(--user-text-color, var(--text-on-light)) !important;
+}
+
+#share-container a {
+    color: var(--user-text-color, var(--text-on-light)) !important;
+    text-decoration: underline !important;
+    font-style: italic !important;
+    position: relative;
+    padding-right: 24px;
+}
+
+#share-container a::after {
+    content: " 📋";
+    font-style: normal;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+#share-container a:hover::after {
+    opacity: 1;
+}
+
+/* Theme-aware hover states */
+body:not(.dark-mode) tr:hover {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 70%, white 30%) !important;
+}
+
+body:not(.dark-mode) button:hover {
+    background-color: color-mix(in srgb, var(--user-bg-color, var(--bg-on-light)) 60%, white 40%) !important;
+}
+
+/* Theme-aware link colors */
+body:not(.dark-mode) a {
+    color: var(--user-text-color, var(--text-on-light)) !important;
+    opacity: 0.9;
+}
+
+body:not(.dark-mode) a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Theme-aware placeholders */
+body:not(.dark-mode) ::placeholder {
+    color: color-mix(in srgb, var(--user-text-color, var(--text-on-light)) 70%, transparent 30%) !important;
+    opacity: 1;
+}
+
+/* Dark mode overrides all theme colors */
+body.dark-mode {
+    --text-color: var(--text-on-dark) !important;
+    --bg-color: var(--bg-on-dark) !important;
+    --border-color: var(--border-on-dark) !important;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: #444;
+    border-color: #666;
+    color: #f1f1f1;
+}
+
+/* Rest of original CSS rules would follow here */
+/* Match extension styling */
+body {
+    font-family: var(--user-font-family, Arial, sans-serif);
+    background-color: var(--user-main-bg-color, #f5f5f5) !important;
+    color: var(--user-text-color, #333333);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+#main-container {
+    padding: 20px;
+    background-color: var(--user-main-bg-color, #f5f5f5);
+}
+
+.content-box {
+    background-color: var(--user-bg-color, #ffffff);
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.title-box {
+    margin-bottom: 20px;
+}
+
+.table-box {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: color-mix(in srgb, var(--user-bg-color, #ffffff) 85%, black 15%);
+}
+
+/* Dark mode overrides */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .content-box {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode th {
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #444 !important;
+}
