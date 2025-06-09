@@ -1,14 +1,14 @@
 # Refactoring Blueprint: List Assist Chrome Extension
 
-**Project:** List Assist Chrome Extension (Superb Version)
+**Project:** List Assist Chrome Extension
 **Lead Architect:** (Superb Engineer)
 **Assigned Engineer:** (Superb Engineer)
 **Date:** (Current Date)
-**Version:** 1.1 (Updated for Superb Setup)
+**Version:** 1.0
 
 ## 1. Project Overview & Goals
 
-The List Assist Chrome Extension allows users to create, manage, customize, and share shopping lists, with affiliate link integration. The current codebase has grown organically, leading to some duplication and inefficiencies. This refactoring initiative targets the "Superb" version of the codebase.
+The List Assist Chrome Extension allows users to create, manage, customize, and share shopping lists, with affiliate link integration. The current codebase has grown organically, leading to some duplication and inefficiencies.
 
 **Primary Goals of this Refactoring Initiative:**
 
@@ -30,38 +30,15 @@ The List Assist Chrome Extension allows users to create, manage, customize, and 
 
 ## 3. Prerequisites & Setup
 
-**3.1. Working Directories:**
-
-*   **Main Extension Code:** All refactoring work for the core extension will be done in:
-    *   `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/`
-*   **Shared Pages Code (for GitHub Pages):** All refactoring work for the files intended for GitHub Pages (styles, scripts, HTML for shared lists) will effectively be done by syncing files into:
-    *   `/Users/tradexy/Documents/Cline/listassist/superb_docs/`
-    *   This `superb_docs` folder is the source for the `cline-superb-listassist-pages` GitHub repository.
-
-**3.2. Version Control & Repositories:**
-
-1.  **Main Extension Repository (`cline-listassist` - private):**
-    *   The `superb_live-extension` folder is a copy of the live extension code. You will be working within this folder. Ensure changes are committed to a new branch within the main `cline-listassist` repository (or a new dedicated repository if preferred, but for now, assume a branch on the existing private repo).
-2.  **Shared Pages Repository (`cline-superb-listassist-pages` - public):**
-    *   A new public GitHub repository has been created: `https://github.com/tradexy/cline-superb-listassist-pages`
-    *   The initial content of `/Users/tradexy/Documents/Cline/listassist/superb_docs/` has been pushed to this repository.
-    *   This repository is configured for GitHub Pages, serving from the `main` branch, `/ (root)` directory. This means changes pushed to the `main` branch of this repository will be live on GitHub Pages.
-
-**3.3. Development Environment:**
-
-1.  Set up a local development environment where you can load the extension from `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/` as an "unpacked extension" in Chrome.
-2.  Ensure you can serve the `/Users/tradexy/Documents/Cline/listassist/superb_docs/` folder locally (e.g., using a simple HTTP server like `python -m http.server` or VS Code Live Server) to test `share.html` before pushing to the public GitHub Pages repo.
-
-**3.4. Cloudflare Worker Context:**
-
-1.  The extension utilizes a Cloudflare Worker for Amazon affiliate link generation. The source code for this worker is located at:
-    *   `/Users/tradexy/Documents/Cline/listassist/cline-listassist/amazon-affiliate-extension-worker/`
-2.  The `superb_live-extension` will continue to use the *same deployed Cloudflare worker URL*. No changes are required to the worker itself for this refactoring task. This information is for context. Our refactoring will ensure the call to this worker is efficient and centralized within the extension's JavaScript.
-
-**3.5. Understanding the Code:**
-
-1.  Review the existing codebase within `superb_live-extension` and `superb_docs`, focusing on the files mentioned in the initial analysis (CSS files, JS files with helpers, `share.html`, `shopping_list.html`, etc.).
-2.  Familiarize yourself with the extension's core features by using the version in `superb_live-extension`.
+1.  **Version Control:**
+    *   Ensure both repositories (`cline-listassist` and `cline-listassist-pages`) are under Git version control.
+    *   Create a new feature branch in each repository for this refactoring work (e.g., `refactor/code-consolidation`).
+2.  **Development Environment:**
+    *   Set up a local development environment where you can load the extension as an "unpacked extension" in Chrome.
+    *   Ensure you can serve the `docs` folder locally (e.g., using a simple HTTP server like `python -m http.server` or VS Code Live Server) to test `share.html`.
+3.  **Understanding the Code:**
+    *   Review the existing codebase provided, focusing on the files mentioned in the initial analysis (CSS files, JS files with helpers, `share.html`, `shopping_list.html`, etc.).
+    *   Familiarize yourself with the extension's core features by using it.
 
 ## 4. Refactoring Roadmap (Top-Down Plan)
 
@@ -69,28 +46,28 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 **Phase 1: Preparation & Analysis (Foundation)**
 
-*   **Task 1.1:** Branching Strategy
-*   **Task 1.2:** Detailed Audit of Duplicated Code (CSS & JS) in `superb_live-extension` and `superb_docs`
-*   **Task 1.3:** Establish a "Golden Source" Directory Structure within `superb_live-extension`
+*   **Task 1.1:** Full Code Backup and Branching
+*   **Task 1.2:** Detailed Audit of Duplicated Code (CSS & JS)
+*   **Task 1.3:** Establish a "Golden Source" Directory Structure
 
 **Phase 2: CSS Consolidation & Unification**
 
-*   **Task 2.1:** Create the Master `core.css` in `superb_live-extension`
-*   **Task 2.2:** Merge Styles from `superb_docs/core.css` into Master `core.css`
-*   **Task 2.3:** Relocate Inline Styles from `superb_docs/share.html` to Master `core.css`
+*   **Task 2.1:** Create the Master `core.css`
+*   **Task 2.2:** Merge Styles from `docs/core.css` into Master `core.css`
+*   **Task 2.3:** Relocate Inline Styles from `share.html` to Master `core.css`
 *   **Task 2.4:** Update All HTML Files to Link Master `core.css`
-*   **Task 2.5:** Set Up `core.css` Sync from `superb_live-extension` to `superb_docs`
+*   **Task 2.5:** Set Up `core.css` Sync to `docs` Folder
 
 **Phase 3: JavaScript Utility Abstraction**
 
-*   **Task 3.1:** Create `utils.js` in `superb_live-extension`
+*   **Task 3.1:** Create `utils.js` in the Main Extension
 *   **Task 3.2:** Consolidate Encoding/Decoding Functions into `utils.js`
 *   **Task 3.3:** Consolidate Theme/Dark Mode Application Functions into `utils.js`
-*   **Task 3.4:** Create Unified Affiliate Link Generation Function in `utils.js` (Referencing deployed Cloudflare worker)
-*   **Task 3.5:** Update `superb_live-extension` JS Files to Use `utils.js`
-*   **Task 3.6:** Set Up `utils.js` Sync from `superb_live-extension` to `superb_docs`
+*   **Task 3.4:** Create Unified Affiliate Link Generation Function in `utils.js`
+*   **Task 3.5:** Update Extension JS Files to Use `utils.js`
+*   **Task 3.6:** Set Up `utils.js` Sync to `docs` Folder
 
-**Phase 4: Refactoring Core Extension Logic (`superb_live-extension`)**
+**Phase 4: Refactoring Core Extension Logic**
 
 *   **Task 4.1:** Refactor `shopping_list.js`
 *   **Task 4.2:** Refactor `lists.js`
@@ -98,7 +75,7 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 *   **Task 4.4:** Refactor `background.js`
 *   **Task 4.5:** Refactor `collaboration-features.js`
 
-**Phase 5: Refactoring Shared Page Logic (`superb_docs` folder)**
+**Phase 5: Refactoring Shared Page Logic (`docs` folder)**
 
 *   **Task 5.1:** Update `share.html` to use Synced `core.css` and `utils.js`
 *   **Task 5.2:** Refactor `share.js` to Use `utils.js` and Streamline
@@ -125,48 +102,46 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 ---
 
-#### **Task 1.1: Branching Strategy**
+#### **Task 1.1: Full Code Backup and Branching**
 
-*   **Goal:** Isolate refactoring work.
+*   **Goal:** Safeguard the current working state.
 *   **Steps:**
-    1.  **Main Extension (`cline-listassist` private repo):**
-        *   Navigate to your local clone of the `cline-listassist` repository.
-        *   Create a new branch from your main development branch (e.g., `main` or `develop`) named `refactor/superb-consolidation`. Example: `git checkout -b refactor/superb-consolidation main`.
-        *   All changes made within the `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/` directory should be committed to this branch in the `cline-listassist` repository.
-    2.  **Shared Pages (`cline-superb-listassist-pages` public repo):**
-        *   Navigate to your local clone of the `https://github.com/tradexy/cline-superb-listassist-pages.git` repository (which should correspond to the `/Users/tradexy/Documents/Cline/listassist/superb_docs/` folder).
-        *   Create a new branch from `main` named `refactor/superb-consolidation`. Example: `git checkout -b refactor/superb-consolidation main`.
-        *   Changes made to files within `/Users/tradexy/Documents/Cline/listassist/superb_docs/` (including synced files like `core.css`, `utils.js`, and updated `share.html`, `share.js`) will be committed to this branch in the `cline-superb-listassist-pages` repository.
+    1.  Ensure all current changes in both `cline-listassist` and `cline-listassist-pages` repositories are committed to their respective main branches (e.g., `main` or `master`).
+    2.  Create a full backup (e.g., zip archive) of both project directories outside of the Git repositories. Store this backup safely.
+    3.  In the `cline-listassist` repository, create a new branch named `refactor/code-consolidation` from the main branch. Check out this new branch.
+    4.  In the `cline-listassist-pages` repository (which contains the `docs` folder), create a new branch named `refactor/code-consolidation` from its main branch. Check out this new branch.
+    5.  All subsequent work for this refactoring effort will be done on these new branches.
 
 ---
 
 #### **Task 1.2: Detailed Audit of Duplicated Code (CSS & JS)**
 
-*   **Goal:** Identify specific instances of duplicated CSS rules and JavaScript functions within the `superb_live-extension` and `superb_docs` folders.
+*   **Goal:** Identify specific instances of duplicated CSS rules and JavaScript functions.
+*   **Tools:** Use a text editor with good search functionality (e.g., VS Code "Search in files") or a diff tool.
 *   **Steps:**
     1.  **CSS Audit:**
-        *   Compare `superb_live-extension/core.css` (or its path if moved to `css/`) and `superb_docs/core.css`.
+        *   Compare `cline-listassist/core.css` and `cline-listassist/docs/core.css`.
         *   List all identical or near-identical CSS rule blocks.
-        *   Note CSS rules that are unique to `superb_docs/core.css`.
-        *   Identify any inline `<style>` blocks in HTML files (especially `superb_docs/share.html`).
+        *   Note CSS rules that are unique to `docs/core.css` (e.g., for `#share-container`).
+        *   Identify any inline `<style>` blocks in HTML files (especially `share.html`).
     2.  **JavaScript Audit:**
-        *   Search for the following function names or similar logic across all `.js` files (`background.js`, `collaboration-features.js`, `lists.js`, `options.js`, `shopping_list.js`, `share.js`) within `superb_live-extension` and `superb_docs`:
+        *   Search for the following function names or similar logic across all `.js` files (`background.js`, `collaboration-features.js`, `lists.js`, `options.js`, `shopping_list.js`, `share.js`):
             *   `utf8_to_b64` / `b64_to_utf8` (and similar Base64 logic)
             *   `applyThemeSettings` / `applyTheme` / `applyDarkMode` (logic that sets CSS variables or body classes for theming)
             *   `maybeInjectAffiliateTag` (affiliate link generation logic)
             *   Any other helper functions that appear in multiple files (e.g., DOM helpers if any).
         *   Document where each duplicated function is found and note any minor variations.
-    3.  Create a simple document (e.g., `refactoring_audit.txt`) within `superb_live-extension` to list these findings. This will be your checklist for elimination.
+    3.  Create a simple document (e.g., `refactoring_audit.txt`) in your `cline-listassist` branch to list these findings. This will be your checklist for elimination.
 
 ---
 
 #### **Task 1.3: Establish a "Golden Source" Directory Structure**
 
 *   **Goal:** Define where the canonical shared files will reside.
-*   **Decision:** The "golden source" for `core.css` and the new `utils.js` will be within the `superb_live-extension`'s directory structure (e.g., `superb_live-extension/css/core.css` and `superb_live-extension/js/utils.js`). These will then be synced/copied to the `/Users/tradexy/Documents/Cline/listassist/superb_docs/` folder for the GitHub Pages deployment.
+*   **Decision:** The "golden source" for `core.css` and the new `utils.js` will be within the main extension's directory structure (e.g., `cline-listassist/css/core.css` and `cline-listassist/js/utils.js`). These will then be synced/copied to the `cline-listassist/docs/` folder for the GitHub Pages deployment.
 *   **Steps:**
-    1.  Within `superb_live-extension`, create `css` and `js` subdirectories if they don't exist and you prefer this organization (e.g., `superb_live-extension/css/` and `superb_live-extension/js/`). Otherwise, root is fine.
-    2.  Confirm that the `superb_docs` folder for GitHub pages is at `/Users/tradexy/Documents/Cline/listassist/superb_docs/`.
+    1.  If they don't exist, create `css` and `js` subdirectories in your main `cline-listassist` project root if you prefer to organize (e.g., `cline-listassist/css/` and `cline-listassist/js/`). Otherwise, root is fine.
+    2.  Confirm that the `docs` folder for GitHub pages is at `cline-listassist/docs/`.
 
 ---
 
@@ -174,48 +149,48 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 ---
 
-#### **Task 2.1: Create the Master `core.css` in `superb_live-extension`**
+#### **Task 2.1: Create the Master `core.css`**
 
 *   **Goal:** Start with a single CSS file that will become the source of truth.
 *   **Steps:**
-    1.  Work within the `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/` directory.
-    2.  Decide which existing `core.css` is more comprehensive or a better starting point. Let's assume it's `superb_live-extension/core.css` (the one from the main extension, not the `superb_docs` folder).
-    3.  If you created a `css` subdirectory: Move `superb_live-extension/core.css` to `superb_live-extension/css/core.css`. Update its path in any HTML files that currently link to it from the root.
+    1.  In the `cline-listassist` repository (on your `refactor/code-consolidation` branch):
+    2.  Decide which existing `core.css` is more comprehensive or a better starting point. Let's assume it's `cline-listassist/core.css` (the one from the main extension, not the `docs` folder).
+    3.  If you created a `css` subdirectory: Move `cline-listassist/core.css` to `cline-listassist/css/core.css`. Update its path in any HTML files that currently link to it from the root.
     4.  This file is now your "Master `core.css`".
 
 ---
 
-#### **Task 2.2: Merge Styles from `superb_docs/core.css` into Master `core.css`**
+#### **Task 2.2: Merge Styles from `docs/core.css` into Master `core.css`**
 
 *   **Goal:** Integrate all necessary styles into one file, eliminating redundancy.
 *   **Steps:**
-    1.  Open both the Master `core.css` (e.g., `superb_live-extension/css/core.css`) and the `superb_docs/core.css`.
-    2.  Carefully review `superb_docs/core.css`. For each rule or block of rules:
+    1.  Open both the Master `core.css` (e.g., `cline-listassist/css/core.css`) and the `cline-listassist/docs/core.css`.
+    2.  Carefully review `cline-listassist/docs/core.css`. For each rule or block of rules:
         *   **If identical or very similar to a rule in Master `core.css`:** Do nothing yet, or if the version in Master is older/less complete, update the Master version. The goal is one best version.
-        *   **If unique and specific to the share page functionality (e.g., styles for `#share-container`):** Copy these unique rules into the Master `core.css`.
+        *   **If unique and specific to the share page functionality (e.g., styles for `#share-table`, `#share-container`, or specific subtitle styling for the share page):** Copy these unique rules into the Master `core.css`.
             *   Consider grouping these under a comment like `/* === Share Page Specific Styles === */` or even wrapping them with a parent class like `.share-page-body { ... }` if you want to scope them more tightly, though direct element/ID selectors should be fine if `share.html` has a unique body class or top-level container ID. For now, direct integration is fine.
-        *   **If a general style (e.g., table, p, body) from `superb_docs/core.css` is better or more up-to-date than what's in Master `core.css`:** Replace the version in Master `core.css`.
+        *   **If a general style (e.g., table, p, body) from `docs/core.css` is better or more up-to-date than what's in Master `core.css`:** Replace the version in Master `core.css`.
     3.  **Focus on CSS Variables:** Ensure that all theme-related styling (colors, fonts, backgrounds) consistently uses the CSS variables:
         *   `--user-font-family`
         *   `--user-main-bg-color`
         *   `--user-bg-color`
         *   `--user-text-color`
         *   And the dark mode overrides.
-    4.  Once all relevant styles from `superb_docs/core.css` are merged, you can (for now) keep `superb_docs/core.css` as is, or empty it. It will be overwritten in Task 2.5.
-    5.  **Test:** Load the extension from `superb_live-extension` and navigate through its pages. Check for any visual regressions.
+    4.  Once all relevant styles from `docs/core.css` are merged, you can (for now) keep `docs/core.css` as is, or empty it. It will be overwritten in Task 2.5.
+    5.  **Test:** Load the extension and navigate through its pages. Check for any visual regressions.
 
 ---
 
-#### **Task 2.3: Relocate Inline Styles from `superb_docs/share.html` to Master `core.css`**
+#### **Task 2.3: Relocate Inline Styles from `share.html` to Master `core.css`**
 
 *   **Goal:** Remove inline styles for better maintainability and CSP compliance.
 *   **Steps:**
-    1.  Open `/Users/tradexy/Documents/Cline/listassist/superb_docs/share.html`.
+    1.  Open `cline-listassist/docs/share.html`.
     2.  Locate the `<style>` block at the end of the `<body>`.
     3.  Copy all CSS rules from this inline `<style>` block.
-    4.  Paste these rules into your Master `core.css` (e.g., `superb_live-extension/css/core.css`), preferably under the `/* === Share Page Specific Styles === */` section if you created one.
-    5.  Delete the entire `<style> ... </style>` block from `/Users/tradexy/Documents/Cline/listassist/superb_docs/share.html`.
-    6.  **Test:** Serve `superb_docs/share.html` locally and ensure styles are still applied correctly from the (yet to be synced) Master `core.css`. For now, you might need to temporarily link `superb_docs/share.html` to the master `core.css` in your local `superb_live-extension` checkout for testing this step, or wait until Task 2.5.
+    4.  Paste these rules into your Master `core.css` (e.g., `cline-listassist/css/core.css`), preferably under the `/* === Share Page Specific Styles === */` section if you created one.
+    5.  Delete the entire `<style> ... </style>` block from `cline-listassist/docs/share.html`.
+    6.  **Test:** Serve `share.html` locally and ensure styles are still applied correctly from the (yet to be synced) Master `core.css`. For now, you might need to temporarily link `share.html` to the master `core.css` in your local `cline-listassist` checkout for testing this step, or wait until Task 2.5.
 
 ---
 
@@ -223,40 +198,44 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 *   **Goal:** Ensure all parts of the extension and the share page use the single CSS source.
 *   **Steps:**
-    1.  In the `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/` directory:
+    1.  In the `cline-listassist` repository:
         *   For each HTML file (`shopping_list.html`, `lists.html`, `options.html`, `disclosure.html`, `enhanced_list.html`):
             *   Update the `<link rel="stylesheet" ...>` tag to point to the Master `core.css`.
-            *   Example: If Master `core.css` is now at `css/core.css` within `superb_live-extension`, the link should be `<link rel="stylesheet" type="text/css" href="css/core.css">`.
-    2.  In `/Users/tradexy/Documents/Cline/listassist/superb_docs/share.html`:
-        *   Update its `<link rel="stylesheet" ...>` to point to `core.css` (it will expect `core.css` to be in the same `superb_docs` directory after the sync step). The href should be `href="core.css"`.
+            *   Example: If Master `core.css` is now at `css/core.css`, the link should be `<link rel="stylesheet" type="text/css" href="css/core.css">`.
+    2.  In `cline-listassist/docs/share.html`:
+        *   Update its `<link rel="stylesheet" ...>` to point to `core.css` (it will expect `core.css` to be in the same `docs` directory after the sync step). The href should be `href="core.css"`.
     3.  **Test:**
-        *   Load the extension from `superb_live-extension`. Navigate to all its pages. Verify styling.
-        *   Locally serve `superb_docs/share.html` (after performing Task 2.5 or manually copying the Master `core.css` to `superb_docs` for this test). Verify styling.
+        *   Load the extension. Navigate to all its pages. Verify styling.
+        *   Locally serve `docs/share.html` (after performing Task 2.5 or manually copying the Master `core.css` to `docs` for this test). Verify styling.
 
 ---
 
-#### **Task 2.5: Set Up `core.css` Sync from `superb_live-extension` to `superb_docs`**
+#### **Task 2.5: Set Up `core.css` Sync to `docs` Folder**
 
-*   **Goal:** Automate or establish a clear process for keeping `superb_docs/core.css` identical to Master `core.css`.
+*   **Goal:** Automate or establish a clear process for keeping `docs/core.css` identical to Master `core.css`.
 *   **Options:**
-    *   **Manual Copy:** The simplest. After any change to Master `core.css`, manually copy it to `/Users/tradexy/Documents/Cline/listassist/superb_docs/core.css`. Document this step clearly.
+    *   **Manual Copy:** The simplest. After any change to Master `core.css`, manually copy it to `cline-listassist/docs/core.css`. Document this step clearly.
     *   **Simple Script (Recommended for consistency):**
-        *   Create a very simple shell script (e.g., `sync_shared_files.sh`, ideally placed in `cline-listassist` root or `superb_live-extension` parent).
-        *   This script would simply copy `cline-listassist/superb_live-extension/css/core.css` to `superb_docs/core.css`.
-        *   Example `sync_shared_files.sh` assuming it's run from `/Users/tradexy/Documents/Cline/listassist/` directory:
+        *   Create a very simple shell script (e.g., `sync_shared_files.sh`) or a `package.json` script (if using Node.js for anything else).
+        *   This script would simply copy `cline-listassist/css/core.css` to `cline-listassist/docs/core.css`.
+        *   Example `sync_shared_files.sh`:
             ```bash
             #!/bin/bash
-            echo "Syncing core.css to superb_docs..."
-            cp ./cline-listassist/superb_live-extension/css/core.css ./superb_docs/core.css
+            echo "Syncing core.css to docs..."
+            cp ./css/core.css ./docs/core.css
             # Add utils.js later
             echo "Sync complete."
             ```
-            Adjust paths based on where the script is and where it's run from.
+        *   Run this script whenever Master `core.css` is updated.
 *   **Steps:**
     1.  Choose your preferred method (manual or script).
     2.  If scripting, create and test the script.
     3.  Perform the sync/copy now.
-    4.  **Test GitHub Pages:** After syncing `core.css` to `superb_docs`, commit and push the `refactor/superb-consolidation` branch of your `cline-superb-listassist-pages` repository. Check the GitHub Pages URL (e.g., `https://tradexy.github.io/cline-superb-listassist-pages/share.html` if `share.html` is at the root) to see if styles are applied. For now, local testing of `superb_docs/share.html` with the synced `core.css` is key.
+    4.  **Test:**
+        *   Commit changes in `cline-listassist`.
+        *   Commit changes in `cline-listassist-pages` (specifically the updated `docs/core.css` if you copied it, and `docs/share.html` if its link changed).
+        *   Push both `refactor/code-consolidation` branches.
+        *   Check if GitHub Pages for `cline-listassist-pages` rebuilds and if the shared list page uses the new styles correctly. (This depends on how GitHub Pages is set up for the `cline-listassist-pages` repo – it usually deploys from a specific branch like `main` or `gh-pages` from the `docs` folder of that branch). For now, local testing of `share.html` with the synced `core.css` is key.
 
 ---
 
@@ -264,13 +243,13 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 ---
 
-#### **Task 3.1: Create `utils.js` in `superb_live-extension`**
+#### **Task 3.1: Create `utils.js` in the Main Extension**
 
 *   **Goal:** Create a central file for shared JavaScript utility functions.
 *   **Steps:**
-    1.  In the `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/` directory:
+    1.  In the `cline-listassist` repository:
     2.  Create a new file named `utils.js`.
-    3.  Place it in the `js/` subdirectory if you created one (e.g., `superb_live-extension/js/utils.js`), or in the root.
+    3.  Place it in the `js/` subdirectory if you created one (e.g., `cline-listassist/js/utils.js`), or in the root.
     4.  Add a simple structure, perhaps an object to namespace the utilities, or just plain functions:
         ```javascript
         // js/utils.js
@@ -411,7 +390,7 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
                         const asin = this.extractAsinFromUrl(originalUrl); // Use this.extractAsinFromUrl
                         if (asin) {
                             // IMPORTANT: The Cloudflare worker URL should be configurable or a constant
-                            const CF_WORKER_BASE = 'https://amzn-affil-chrome-ext-0521.dftopcat.workers.dev'; // This is the deployed worker URL
+                            const CF_WORKER_BASE = 'https://amzn-affil-chrome-ext-0521.dftopcat.workers.dev';
                             const workerUrl = `${CF_WORKER_BASE}/get-product?asin=${asin}`;
                             try {
                                 const response = await fetch(workerUrl);
@@ -448,11 +427,11 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 ---
 
-#### **Task 3.5: Update `superb_live-extension` JS Files to Use `utils.js`**
+#### **Task 3.5: Update Extension JS Files to Use `utils.js`**
 
 *   **Goal:** Eliminate duplicated code from individual JS files and use the new utilities.
 *   **Steps:**
-    1.  For each relevant JS file in the main extension (`background.js`, `shopping_list.js`, `lists.js`, `options.js`, `collaboration-features.js`) within `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/`:
+    1.  For each relevant JS file in the main extension (`background.js`, `shopping_list.js`, `lists.js`, `options.js`, `collaboration-features.js`):
         *   **Include `utils.js`:** Ensure the corresponding HTML file includes `<script src="js/utils.js"></script>` *before* the page-specific script. For `background.js` (service worker), you'll need to use `importScripts('js/utils.js');` at the top of `background.js`.
         *   **Remove Duplicates:** Delete the local implementations of `utf8_to_b64`, `b64_to_utf8`, theme/dark mode applicators, and affiliate link generators.
         *   **Replace Calls:**
@@ -460,13 +439,13 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
             *   Change `b64_to_utf8(str)` to `ListAssistUtils.b64_to_utf8(str)`.
             *   Replace theme/dark mode logic with calls to `ListAssistUtils.applyThemeSettings(theme)` and `ListAssistUtils.applyDarkMode(isDark)`.
             *   Replace calls to `maybeInjectAffiliateTag(url)` with `await ListAssistUtils.generateAffiliateUrl(url)`. Update the calling function to be `async` if it's not already.
-    2.  **Specific to `superb_live-extension/background.js`:**
+    2.  **Specific to `background.js`:**
         *   Ensure `importScripts('js/utils.js');` is at the very top.
         *   Update `utf8_to_b64` usage.
-    3.  **Specific to `superb_live-extension/shopping_list.js`:**
+    3.  **Specific to `shopping_list.js`:**
         *   This file heavily uses these utilities. Pay close attention to the `async` nature of the new affiliate function when adding items or processing imported items.
     4.  **Test Extensively:** After refactoring each JS file:
-        *   Reload the extension from `superb_live-extension`.
+        *   Reload the extension.
         *   Test all features related to that file:
             *   Importing items (background, shopping_list)
             *   Adding items manually (shopping_list)
@@ -475,21 +454,21 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 ---
 
-#### **Task 3.6: Set Up `utils.js` Sync from `superb_live-extension` to `superb_docs`**
+#### **Task 3.6: Set Up `utils.js` Sync to `docs` Folder**
 
 *   **Goal:** Make `utils.js` available to `share.html`.
 *   **Steps:**
-    1.  Update your sync script (e.g., `sync_shared_files.sh`) or manual process to also copy `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/js/utils.js` to `/Users/tradexy/Documents/Cline/listassist/superb_docs/utils.js`.
+    1.  Update your sync script (e.g., `sync_shared_files.sh`) or manual process to also copy `cline-listassist/js/utils.js` to `cline-listassist/docs/utils.js`.
         *   Example addition to `sync_shared_files.sh`:
             ```bash
-            echo "Syncing utils.js to superb_docs..."
-            cp ./cline-listassist/superb_live-extension/js/utils.js ./superb_docs/utils.js
+            echo "Syncing utils.js to docs..."
+            cp ./js/utils.js ./docs/utils.js
             ```
     2.  Run the script/process.
 
 ---
 
-### **Phase 4: Refactoring Core Extension Logic (`superb_live-extension`)**
+### **Phase 4: Refactoring Core Extension Logic**
 
 This phase focuses on cleaning up the individual JS files now that utilities are centralized.
 
@@ -570,7 +549,7 @@ This phase focuses on cleaning up the individual JS files now that utilities are
 
 ---
 
-### **Phase 5: Refactoring Shared Page Logic (`superb_docs` folder)**
+### **Phase 5: Refactoring Shared Page Logic (`docs` folder)**
 
 This phase targets the files that are deployed to GitHub Pages.
 
@@ -580,7 +559,7 @@ This phase targets the files that are deployed to GitHub Pages.
 
 *   **Goal:** Ensure `share.html` uses the canonical shared resources.
 *   **Steps:**
-    1.  Open `/Users/tradexy/Documents/Cline/listassist/superb_docs/share.html`.
+    1.  Open `cline-listassist/docs/share.html`.
     2.  Ensure it links to `core.css` (no path, as it's in the same directory): `<link rel="stylesheet" type="text/css" href="core.css">`.
     3.  Add a script tag to include `utils.js` *before* `share.js`:
         ```html
@@ -598,7 +577,7 @@ This phase targets the files that are deployed to GitHub Pages.
 
 *   **Goal:** Simplify `share.js`, remove its duplicated utilities, and ensure correct affiliate link generation on the shared page.
 *   **Steps:**
-    1.  Open `/Users/tradexy/Documents/Cline/listassist/superb_docs/share.js`.
+    1.  Open `cline-listassist/docs/share.js`.
     2.  **Remove Duplicates:**
         *   Delete the local `b64_to_utf8` function.
         *   Delete the local `maybeInjectAffiliateTag` function.
@@ -622,7 +601,7 @@ This phase targets the files that are deployed to GitHub Pages.
     4.  **Error Handling:** Improve error handling for payload parsing or missing elements.
     5.  **Test:**
         *   Generate a share link from the extension.
-        *   Open it in a browser (serving `superb_docs` locally).
+        *   Open it in a browser (serving `docs` locally).
         *   Verify:
             *   List title, subtitle, and items are displayed correctly.
             *   Theme and dark mode from the payload are applied.
@@ -648,7 +627,7 @@ This phase targets the files that are deployed to GitHub Pages.
 
 *   **Goal:** A polished and consistent look and feel.
 *   **Steps:**
-    1.  With the Master `core.css`, review all extension pages (`shopping_list.html`, `lists.html`, `options.html`) within `superb_live-extension` and `share.html` within `superb_docs`.
+    1.  With the Master `core.css`, review all extension pages (`shopping_list.html`, `lists.html`, `options.html`) and `share.html`.
     2.  Check for consistency in:
         *   Button styles
         *   Input field styles
@@ -716,7 +695,7 @@ This phase targets the files that are deployed to GitHub Pages.
         *   Toggle "Dark Mode" (verify saved state and live apply on options page).
         *   Link to customize keyboard shortcuts.
     6.  **Extension Icon Behavior (`background.js`):**
-        *   Icon and tooltip change on Amazon vs. non-Amazon pages.
+        *   Icon and tooltip change on Amazon product pages vs. other pages.
     7.  **Affiliate Disclosure (`disclosure.html`):**
         *   Page loads correctly.
     8.  **Cross-Browser (Optional, if supporting more than Chrome):** Basic checks.
@@ -753,8 +732,6 @@ This phase targets the files that are deployed to GitHub Pages.
 *   **Integration Testing:** Testing how different parts of the extension work together after refactoring each JS file (e.g., `shopping_list.js` using `utils.js` correctly).
 *   **End-to-End Functional Testing:** Following the comprehensive test plan in Task 7.1.
 *   **Manual Testing:** Primary mode of testing for this UI-heavy extension.
-*   **Load unpacked extension from:** `/Users/tradexy/Documents/Cline/listassist/cline-listassist/superb_live-extension/`
-*   **Test shared pages via:** The GitHub Pages URL generated from the `main` branch of `https://github.com/tradexy/cline-superb-listassist-pages` (once changes from its `refactor/superb-consolidation` branch are merged to its `main`). During development, test `/Users/tradexy/Documents/Cline/listassist/superb_docs/share.html` locally.
 *   **Focus on Regressions:** The main goal is that everything that worked before still works.
 
 ## 7. Code Style & Documentation Guidelines
@@ -772,3 +749,7 @@ This phase targets the files that are deployed to GitHub Pages.
 *   **Commits:**
     *   Write clear, concise commit messages (e.g., "Refactor: Centralize Base64 utils in utils.js", "Fix: Affiliate link for Amazon on shared page").
     *   Commit small, logical units of work.
+
+---
+
+* End
