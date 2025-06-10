@@ -405,16 +405,6 @@ body:not(.dark-mode) td {
     padding-right: 24px;
 }
 
-#share-container a::after {
-    content: " 📋";
-    font-style: normal;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-#share-container a:hover::after {
-    opacity: 1;
-}
 
 /* Theme-aware hover states */
 body:not(.dark-mode) tr:hover {
