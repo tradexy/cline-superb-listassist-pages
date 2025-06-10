@@ -141,15 +141,12 @@ window.addEventListener('DOMContentLoaded', () => {
         if (item.url) {
             const a = document.createElement('a');
             a.href = maybeInjectAffiliateTag(item.url);
-            a.target = '_blank';
             a.textContent = item.name || 'Unnamed Item';
             
-            // Add copy icon after name (visible on hover)
+            // Add copy icon after name (always visible)
             const copyIconName = document.createElement('span');
-            copyIconName.textContent = '📋'; // Use textContent for cleaner emoji
+            copyIconName.textContent = ' 📋'; // Space before emoji
             copyIconName.style.cursor = 'pointer';
-            copyIconName.style.opacity = '0'; // Initially hidden
-            copyIconName.style.transition = 'opacity 0.2s ease'; // Smooth transition
             copyIconName.title = 'Copy link';
             copyIconName.onclick = async (e) => {
                 e.preventDefault();
@@ -168,13 +165,6 @@ window.addEventListener('DOMContentLoaded', () => {
             linkIconWrapperName.appendChild(a);
             linkIconWrapperName.appendChild(copyIconName);
             nameCell.appendChild(linkIconWrapperName);
-
-            nameCell.addEventListener('mouseenter', () => {
-                copyIconName.style.opacity = '1';
-            });
-            nameCell.addEventListener('mouseleave', () => {
-                copyIconName.style.opacity = '0';
-            });
         } else {
             nameCell.textContent = item.name || 'Unnamed Item';
         }
@@ -185,7 +175,6 @@ window.addEventListener('DOMContentLoaded', () => {
         if (item.url) {
             const a = document.createElement('a');
             a.href = maybeInjectAffiliateTag(item.url); // Apply affiliate tag
-            a.target = '_blank';
             
             try {
               const urlObj = new URL(item.url);
@@ -204,9 +193,9 @@ window.addEventListener('DOMContentLoaded', () => {
               a.textContent = 'View'; // Fallback to 'View' if URL is invalid
             }
             
-            // Add copy link icon (always visible)
+            // Add copy link icon (always visible with space)
             const copyIconLink = document.createElement('span');
-            copyIconLink.textContent = '📋'; // Use textContent for cleaner emoji
+            copyIconLink.textContent = ' 📋'; // Space before emoji
             copyIconLink.style.cursor = 'pointer';
             copyIconLink.title = 'Copy link';
             copyIconLink.onclick = async (e) => {
