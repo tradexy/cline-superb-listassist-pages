@@ -1,0 +1,10 @@
+*.env
+*.pem
+*.key
+*.secret
+*.sandbox_env
+z_contents.txt
+z_list_files.sh
+code_refactoring_updates_copy.md
+code_refactoring_original.md
+code_refactoring.md

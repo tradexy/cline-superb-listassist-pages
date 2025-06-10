@@ -5,7 +5,7 @@
 1. **Share Pages (Public)**
 The working extension files are located in `/listassist/docs` folder. This is the version currently being developed and tested.
    - Path: `/listassist/docs`
-   - GitHub: `https://github.com/tradexy/cline-listassist-pages.git`
+   - GitHub: `https://github.com/tradexy/cline-superb-listassist-pages.git`
    - Contains HTML/JS files for shared list functionality
    - Automatically deploys to GitHub Pages
 

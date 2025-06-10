@@ -31,7 +31,7 @@ The List Assist Chrome Extension allows users to create, manage, customize, and 
 ## 3. Prerequisites & Setup
 
 1.  **Version Control:**
-    *   Ensure both repositories (`cline-listassist` and `cline-listassist-pages`) are under Git version control.
+    *   Ensure both repositories (`cline-listassist` and `cline-superb-listassist-pages`) are under Git version control.
     *   Create a new feature branch in each repository for this refactoring work (e.g., `refactor/code-consolidation`).
 2.  **Development Environment:**
     *   Set up a local development environment where you can load the extension as an "unpacked extension" in Chrome.
@@ -106,10 +106,10 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
 
 *   **Goal:** Safeguard the current working state.
 *   **Steps:**
-    1.  Ensure all current changes in both `cline-listassist` and `cline-listassist-pages` repositories are committed to their respective main branches (e.g., `main` or `master`).
+    1.  Ensure all current changes in both `cline-listassist` and `cline-superb-listassist-pages` repositories are committed to their respective main branches (e.g., `main` or `master`).
     2.  Create a full backup (e.g., zip archive) of both project directories outside of the Git repositories. Store this backup safely.
     3.  In the `cline-listassist` repository, create a new branch named `refactor/code-consolidation` from the main branch. Check out this new branch.
-    4.  In the `cline-listassist-pages` repository (which contains the `docs` folder), create a new branch named `refactor/code-consolidation` from its main branch. Check out this new branch.
+    4.  In the `cline-superb-listassist-pages` repository (which contains the `docs` folder), create a new branch named `refactor/code-consolidation` from its main branch. Check out this new branch.
     5.  All subsequent work for this refactoring effort will be done on these new branches.
 
 ---
@@ -167,7 +167,7 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
     1.  Open both the Master `core.css` (e.g., `cline-listassist/css/core.css`) and the `cline-listassist/docs/core.css`.
     2.  Carefully review `cline-listassist/docs/core.css`. For each rule or block of rules:
         *   **If identical or very similar to a rule in Master `core.css`:** Do nothing yet, or if the version in Master is older/less complete, update the Master version. The goal is one best version.
-        *   **If unique and specific to the share page functionality (e.g., styles for `#share-table`, `#share-container`, or specific subtitle styling for the share page):** Copy these unique rules into the Master `core.css`.
+        *   **If unique and specific to the share page functionality (e.g., styles for `#share-container`), or specific subtitle styling for the share page):** Copy these unique rules into the Master `core.css`.
             *   Consider grouping these under a comment like `/* === Share Page Specific Styles === */` or even wrapping them with a parent class like `.share-page-body { ... }` if you want to scope them more tightly, though direct element/ID selectors should be fine if `share.html` has a unique body class or top-level container ID. For now, direct integration is fine.
         *   **If a general style (e.g., table, p, body) from `docs/core.css` is better or more up-to-date than what's in Master `core.css`:** Replace the version in Master `core.css`.
     3.  **Focus on CSS Variables:** Ensure that all theme-related styling (colors, fonts, backgrounds) consistently uses the CSS variables:
@@ -635,7 +635,7 @@ This phase targets the files that are deployed to GitHub Pages.
         *   Font usage
         *   Spacing and layout
         *   Dark mode appearance
-    3.  Make any necessary adjustments in Master `core.css`.
+    3.  Make any necessary adjustments in Master `core.2.css`.
 
 ---
 
@@ -695,7 +695,7 @@ This phase targets the files that are deployed to GitHub Pages.
         *   Toggle "Dark Mode" (verify saved state and live apply on options page).
         *   Link to customize keyboard shortcuts.
     6.  **Extension Icon Behavior (`background.js`):**
-        *   Icon and tooltip change on Amazon product pages vs. other pages.
+        *   Icon and tooltip change on Amazon vs. non-Amazon pages.
     7.  **Affiliate Disclosure (`disclosure.html`):**
         *   Page loads correctly.
     8.  **Cross-Browser (Optional, if supporting more than Chrome):** Basic checks.

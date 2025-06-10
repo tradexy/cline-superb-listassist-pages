@@ -156,7 +156,7 @@ This roadmap is divided into phases and tasks. Each task will have detailed step
             *   `maybeInjectAffiliateTag` (affiliate link generation logic)
             *   Any other helper functions that appear in multiple files (e.g., DOM helpers if any).
         *   Document where each duplicated function is found and note any minor variations.
-    3.  Create a simple document (e.g., `refactoring_audit.txt`) within `superb_live-extension` to list these findings. This will be your checklist for elimination.
+    3.  Create a simple document (e.g., `refactoring_audit.txt`) within `superb_live-extension` to document findings. This will be your checklist for elimination.
 
 ---
 
