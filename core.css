@@ -208,6 +208,11 @@ table td:first-child a {
     font-style: normal !important;
 }
 
+/* Remove external link icon that might appear after item name links */
+table td:first-child a::after {
+    content: none !important;
+}
+
 /* Copy Icon Styles for superb_docs */
 .copy-icon {
     margin-left: 5px;
