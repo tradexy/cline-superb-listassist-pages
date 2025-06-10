@@ -175,6 +175,24 @@ window.addEventListener('DOMContentLoaded', () => {
             
             a.style.fontStyle = 'italic'; // Apply italic format
             linkCell.appendChild(a);
+            
+            // Add copy link icon
+            const copyIcon = document.createElement('span');
+            copyIcon.innerHTML = '&nbsp;📋';
+            copyIcon.style.cursor = 'pointer';
+            copyIcon.title = 'Copy link';
+            copyIcon.onclick = async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                try {
+                    await navigator.clipboard.writeText(item.url);
+                    copyIcon.title = 'Copied!';
+                    setTimeout(() => copyIcon.title = 'Copy link', 2000);
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+            };
+            linkCell.appendChild(copyIcon);
         } else {
             linkCell.textContent = '-'; // Placeholder if no URL
         }
