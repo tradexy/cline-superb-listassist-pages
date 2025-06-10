@@ -4,6 +4,7 @@
 *.secret
 *.sandbox_env
 z_contents.txt
+.DS_Store
 z_list_files.sh
 code_refactoring_updates_copy.md
 code_refactoring_original.md
