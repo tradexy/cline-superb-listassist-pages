@@ -138,7 +138,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // Item name cell
         const nameCell = document.createElement('td');
-        nameCell.textContent = item.name || 'Unnamed Item'; // Handle missing name
+        if (item.url) {
+            const a = document.createElement('a');
+            a.href = maybeInjectAffiliateTag(item.url);
+            a.target = '_blank';
+            a.textContent = item.name || 'Unnamed Item';
+            nameCell.appendChild(a);
+        } else {
+            nameCell.textContent = item.name || 'Unnamed Item';
+        }
         tr.appendChild(nameCell);
 
         // Link cell
