@@ -19,6 +19,8 @@ th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align items */
 }
 
 th {
@@ -208,8 +210,8 @@ table td:first-child a {
     font-style: normal !important;
 }
 
-/* Remove external link icon that might appear after item name links */
-table td:first-child a::after {
+/* Remove all ::after content for links within table cells (removes unwanted icons) */
+table td a::after {
     content: none !important;
 }
 
