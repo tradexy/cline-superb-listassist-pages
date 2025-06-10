@@ -19,8 +19,6 @@ th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically align items */
 }
 
 th {
@@ -217,12 +215,18 @@ table td a::after {
 
 /* Copy Icon Styles for superb_docs */
 .copy-icon {
-    margin-left: 5px;
     cursor: pointer;
     vertical-align: middle;
     font-size: 0.9em; /* Slightly smaller than surrounding text */
     opacity: 0; /* Hidden by default for item name */
     transition: opacity 0.2s ease;
+}
+
+/* Container for link text and copy icon */
+.link-icon-wrapper { /* Renamed for clarity and consistency */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between link and icon */
 }
 
 /* Show copy icon on hover for item name */

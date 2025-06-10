@@ -143,13 +143,11 @@ window.addEventListener('DOMContentLoaded', () => {
             a.href = maybeInjectAffiliateTag(item.url);
             a.target = '_blank';
             a.textContent = item.name || 'Unnamed Item';
-            nameCell.appendChild(a);
-
+            
             // Add copy icon after name (visible on hover)
             const copyIconName = document.createElement('span');
             copyIconName.textContent = '📋'; // Use textContent for cleaner emoji
             copyIconName.style.cursor = 'pointer';
-            copyIconName.style.marginLeft = '5px'; // Add some space
             copyIconName.style.opacity = '0'; // Initially hidden
             copyIconName.style.transition = 'opacity 0.2s ease'; // Smooth transition
             copyIconName.title = 'Copy link';
@@ -164,13 +162,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     console.error('Failed to copy: ', err);
                 }
             };
+
+            const linkIconWrapperName = document.createElement('span');
+            linkIconWrapperName.classList.add('link-icon-wrapper');
+            linkIconWrapperName.appendChild(a);
+            linkIconWrapperName.appendChild(copyIconName);
+            nameCell.appendChild(linkIconWrapperName);
+
             nameCell.addEventListener('mouseenter', () => {
                 copyIconName.style.opacity = '1';
             });
             nameCell.addEventListener('mouseleave', () => {
                 copyIconName.style.opacity = '0';
             });
-            nameCell.appendChild(copyIconName);
         } else {
             nameCell.textContent = item.name || 'Unnamed Item';
         }
@@ -200,14 +204,10 @@ window.addEventListener('DOMContentLoaded', () => {
               a.textContent = 'View'; // Fallback to 'View' if URL is invalid
             }
             
-            // a.style.fontStyle = 'italic'; // Removed italic format for consistency via CSS
-            linkCell.appendChild(a);
-            
             // Add copy link icon (always visible)
             const copyIconLink = document.createElement('span');
             copyIconLink.textContent = '📋'; // Use textContent for cleaner emoji
             copyIconLink.style.cursor = 'pointer';
-            copyIconLink.style.marginLeft = '5px'; // Add some space
             copyIconLink.title = 'Copy link';
             copyIconLink.onclick = async (e) => {
                 e.preventDefault();
@@ -220,7 +220,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     console.error('Failed to copy: ', err);
                 }
             };
-            linkCell.appendChild(copyIconLink);
+
+            const linkIconWrapperLink = document.createElement('span');
+            linkIconWrapperLink.classList.add('link-icon-wrapper');
+            linkIconWrapperLink.appendChild(a);
+            linkIconWrapperLink.appendChild(copyIconLink);
+            linkCell.appendChild(linkIconWrapperLink);
         } else {
             linkCell.textContent = '-'; // Placeholder if no URL
         }
