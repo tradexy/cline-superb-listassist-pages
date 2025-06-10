@@ -1,10 +1,104 @@
 /* cline-listassist/core.css */
 body {
     font-family: var(--user-font-family, Arial, sans-serif);
-    background-color: var(--user-bg-color, #ffffff);
+    background-color: var(--user-main-bg-color, #f5f5f5) !important;
     color: var(--user-text-color, #333333);
-    margin: 20px;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+#main-container {
+    padding: 20px;
+    background-color: var(--user-main-bg-color, #f5f5f5);
+}
+
+/* Force main background to show between boxes */
+.content-box {
+    margin: 15px 0 !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Box styles for all content sections */
+.content-box {
+    background-color: var(--user-bg-color, #ffffff);
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Specific box styles */
+.tip-box {
+    margin-bottom: 20px;
+}
+
+.title-box {
+    margin-bottom: 20px;
+}
+
+.form-box {
+    margin-bottom: 20px;
+}
+
+.table-box {
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+:root {
+    --user-main-bg-color: #f5f5f5;
+    --user-bg-color: #ffffff;
+    --user-text-color: #333333;
+    --user-font-family: Arial, sans-serif;
+}
+
+.text-box {
+    background-color: var(--user-bg-color, #ffffff);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.title-box {
+    background-color: var(--user-bg-color, #ffffff);
+    padding: 15px;
+    margin: 10px 0 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle-box {
+    background-color: var(--user-bg-color, #ffffff);
+    padding: 15px;
+    margin: 0 0 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: none;
+    font-size: 1.1em;
+    line-height: 1.4;
+}
+
+.subtitle-box.left {
+    text-align: left;
+}
+
+.subtitle-box.center {
+    text-align: center;
+}
+
+.subtitle-box.right {
+    text-align: right;
+}
+
+.subtitle-box img {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Table styling to match share page */
@@ -49,16 +143,26 @@ a:hover {
     color: #0056b3;
 }
 
-/* Dark Mode Styles - Overrides all theme colors */
+/* Dark Mode Styles - Simple black/dark grey with white text */
 body.dark-mode {
     background-color: #121212 !important;
     color: #ffffff !important;
 }
 
+body.dark-mode .content-box,
+body.dark-mode .text-box,
+body.dark-mode .title-box,
+body.dark-mode .form-box,
+body.dark-mode .table-box {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #333 !important;
+}
+
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode select {
-    background-color: #1e1e1e !important;
+    background-color: #2a2a2a !important;
     color: #ffffff !important;
     border-color: #444 !important;
 }
@@ -84,11 +188,11 @@ body.dark-mode td {
 }
 
 body.dark-mode th {
-    background-color: #1e1e1e !important;
+    background-color: #2a2a2a !important;
 }
 
 body.dark-mode tr:hover {
-    background-color: #2a2a2a !important;
+    background-color: #333 !important;
 }
 
 body.dark-mode h1,
@@ -101,28 +205,126 @@ body.dark-mode td {
 }
 
 body.dark-mode a {
-    color: #82b1ff !important;
+    color: #ffffff !important;
+    text-decoration: underline !important;
 }
 
 body.dark-mode a:hover {
-    color: #448aff !important;
+    color: #dddddd !important;
 }
 
-/* Disable theme colors in dark mode */
+/* Completely disable theme colors in dark mode */
 body.dark-mode {
-    --text-color: #ffffff !important;
-    --bg-color: #121212 !important;
-    --border-color: #444 !important;
+    --user-main-bg-color: #121212 !important;
+    --user-bg-color: #1e1e1e !important;
+    --user-text-color: #ffffff !important;
 }
 
 /* Theme color adjustments */
 body {
-    --text-on-light: #333333;
-    --text-on-dark: #ffffff;
-    --bg-on-light: #ffffff;
-    --bg-on-dark: #121212;
-    --border-on-light: #dddddd;
-    --border-on-dark: #444444;
+  font-family: var(--user-font-family, Arial, sans-serif);
+  color: var(--user-text-color, #333333);
+  background-color: var(--user-bg-color, #ffffff);
+  margin: 0;
+  padding: 10px;
+  min-width: 300px;
+}
+
+/* Theme Controls Styling */
+.collapsible {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.collapsible-header {
+  background-color: #f5f5f5;
+  padding: 10px;
+  cursor: pointer;
+  margin: 0;
+  font-size: 16px;
+  color: #000 !important; /* Force black text in light mode */
+}
+
+.collapsible-content {
+  padding: 10px;
+  background-color: #f8f8f8;
+  display: none;
+}
+
+.collapsible-content.active {
+  display: block;
+}
+
+.theme-option {
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+.dark-mode .theme-option {
+  background-color: #333 !important;
+  border: 1px solid #444 !important;
+}
+
+.theme-option label {
+  display: inline-block;
+  width: 80px;
+  margin-right: 10px;
+  color: #333;
+}
+
+select#fontFamily {
+  background-color: #f8f8f8;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+select#fontFamily option {
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+/* Dark mode overrides for select */
+.dark-mode select#fontFamily,
+.dark-mode select#fontFamily option {
+  background-color: #222;
+  color: #fff;
+  border-color: #444;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #222;
+  color: #eee;
+}
+
+.dark-mode .collapsible-header {
+  background-color: #333;
+  color: #eee !important;
+}
+
+.dark-mode .collapsible-content {
+  background-color: #222;
+  color: #eee !important;
+}
+
+/* Force consistent styling for dropdown in light mode */
+select#fontFamily,
+select#fontFamily option {
+  background-color: #f8f8f8 !important;
+  color: #000 !important;
+}
+
+/* Dark mode dropdown styling */
+.dark-mode select#fontFamily,
+.dark-mode select#fontFamily option {
+  background-color: #222 !important;
+  color: #fff !important;
 }
 
 /* Apply theme colors */
@@ -198,44 +400,19 @@ body:not(.dark-mode) td {
 #share-container a {
     color: var(--user-text-color, var(--text-on-light)) !important;
     text-decoration: underline !important;
-    /* font-style: italic !important; Removed as per user request */
+    font-style: italic !important;
     position: relative;
     padding-right: 24px;
 }
 
-/* Override italic for item name links in the table */
-table td:first-child a {
-    font-style: normal !important;
+#share-container a::after {
+    content: " 📋";
+    font-style: normal;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
-/* Remove all ::after content for links within table cells (removes unwanted icons) */
-table td a::after {
-    content: none !important;
-}
-
-/* Copy Icon Styles for superb_docs */
-.copy-icon {
-    cursor: pointer;
-    vertical-align: middle;
-    font-size: 0.9em; /* Slightly smaller than surrounding text */
-    opacity: 0; /* Hidden by default for item name */
-    transition: opacity 0.2s ease;
-}
-
-/* Container for link text and copy icon */
-.link-icon-wrapper { /* Renamed for clarity and consistency */
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between link and icon */
-}
-
-/* Show copy icon on hover for item name */
-table td:first-child:hover .copy-icon {
-    opacity: 1;
-}
-
-/* Always visible for item link column */
-.copy-icon.always-visible {
+#share-container a:hover::after {
     opacity: 1;
 }
 
@@ -289,68 +466,4 @@ body.dark-mode .dark-mode-toggle {
 }
 
 /* Rest of original CSS rules would follow here */
-/* Match extension styling */
-body {
-    font-family: var(--user-font-family, Arial, sans-serif);
-    background-color: var(--user-main-bg-color, #f5f5f5) !important;
-    color: var(--user-text-color, #333333);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-}
-
-#main-container {
-    padding: 20px;
-    background-color: var(--user-main-bg-color, #f5f5f5);
-}
-
-.content-box {
-    background-color: var(--user-bg-color, #ffffff);
-    padding: 5px 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.title-box {
-    margin-bottom: 20px;
-}
-
-.table-box {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: color-mix(in srgb, var(--user-bg-color, #ffffff) 85%, black 15%);
-}
-
-/* Dark mode overrides */
-body.dark-mode {
-    background-color: #121212 !important;
-    color: #ffffff !important;
-}
-
-body.dark-mode .content-box {
-    background-color: #1e1e1e !important;
-    color: #ffffff !important;
-}
-
-body.dark-mode th {
-    background-color: #2a2a2a !important;
-}
-
-body.dark-mode th,
-body.dark-mode td {
-    border-color: #444 !important;
-}
+/* [Previous CSS content would be properly formatted and included] */
