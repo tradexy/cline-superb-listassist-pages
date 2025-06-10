@@ -144,6 +144,33 @@ window.addEventListener('DOMContentLoaded', () => {
             a.target = '_blank';
             a.textContent = item.name || 'Unnamed Item';
             nameCell.appendChild(a);
+
+            // Add copy icon after name (visible on hover)
+            const copyIconName = document.createElement('span');
+            copyIconName.textContent = '📋'; // Use textContent for cleaner emoji
+            copyIconName.style.cursor = 'pointer';
+            copyIconName.style.marginLeft = '5px'; // Add some space
+            copyIconName.style.opacity = '0'; // Initially hidden
+            copyIconName.style.transition = 'opacity 0.2s ease'; // Smooth transition
+            copyIconName.title = 'Copy link';
+            copyIconName.onclick = async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                try {
+                    await navigator.clipboard.writeText(item.url);
+                    copyIconName.title = 'Copied!';
+                    setTimeout(() => copyIconName.title = 'Copy link', 2000);
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+            };
+            nameCell.addEventListener('mouseenter', () => {
+                copyIconName.style.opacity = '1';
+            });
+            nameCell.addEventListener('mouseleave', () => {
+                copyIconName.style.opacity = '0';
+            });
+            nameCell.appendChild(copyIconName);
         } else {
             nameCell.textContent = item.name || 'Unnamed Item';
         }
@@ -152,47 +179,23 @@ window.addEventListener('DOMContentLoaded', () => {
         // Link cell
         const linkCell = document.createElement('td');
         if (item.url) {
-            const a = document.createElement('a');
-            a.href = maybeInjectAffiliateTag(item.url); // Apply affiliate tag
-            a.target = '_blank';
-            
-            try {
-              const urlObj = new URL(item.url);
-              let hostname = urlObj.hostname;
-              // Remove "www." prefix if present
-              if (hostname.startsWith('www.')) {
-                hostname = hostname.substring(4);
-              }
-              // Remove TLDs like .com, .co.uk, etc. to get just the domain name
-              const parts = hostname.split('.');
-              if (parts.length > 1) {
-                hostname = parts[0];
-              }
-              a.textContent = hostname.charAt(0).toUpperCase() + hostname.slice(1); // Capitalize first letter
-            } catch (e) {
-              a.textContent = 'View'; // Fallback to 'View' if URL is invalid
-            }
-            
-            a.style.fontStyle = 'italic'; // Apply italic format
-            linkCell.appendChild(a);
-            
-            // Add copy link icon
-            const copyIcon = document.createElement('span');
-            copyIcon.innerHTML = '&nbsp;📋';
-            copyIcon.style.cursor = 'pointer';
-            copyIcon.title = 'Copy link';
-            copyIcon.onclick = async (e) => {
+            // Add copy link icon (always visible)
+            const copyIconLink = document.createElement('span');
+            copyIconLink.textContent = '📋'; // Use textContent for cleaner emoji
+            copyIconLink.style.cursor = 'pointer';
+            copyIconLink.title = 'Copy link';
+            copyIconLink.onclick = async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 try {
                     await navigator.clipboard.writeText(item.url);
-                    copyIcon.title = 'Copied!';
-                    setTimeout(() => copyIcon.title = 'Copy link', 2000);
+                    copyIconLink.title = 'Copied!';
+                    setTimeout(() => copyIconLink.title = 'Copy link', 2000);
                 } catch (err) {
                     console.error('Failed to copy: ', err);
                 }
             };
-            linkCell.appendChild(copyIcon);
+            linkCell.appendChild(copyIconLink);
         } else {
             linkCell.textContent = '-'; // Placeholder if no URL
         }

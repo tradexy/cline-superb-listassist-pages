@@ -198,19 +198,33 @@ body:not(.dark-mode) td {
 #share-container a {
     color: var(--user-text-color, var(--text-on-light)) !important;
     text-decoration: underline !important;
-    font-style: italic !important;
+    /* font-style: italic !important; Removed as per user request */
     position: relative;
     padding-right: 24px;
 }
 
-#share-container a::after {
-    content: " 📋";
-    font-style: normal;
-    opacity: 0;
-    transition: opacity 0.2s;
+/* Override italic for item name links in the table */
+table td:first-child a {
+    font-style: normal !important;
 }
 
-#share-container a:hover::after {
+/* Copy Icon Styles for superb_docs */
+.copy-icon {
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+    font-size: 0.9em; /* Slightly smaller than surrounding text */
+    opacity: 0; /* Hidden by default for item name */
+    transition: opacity 0.2s ease;
+}
+
+/* Show copy icon on hover for item name */
+table td:first-child:hover .copy-icon {
+    opacity: 1;
+}
+
+/* Always visible for item link column */
+.copy-icon.always-visible {
     opacity: 1;
 }
 
