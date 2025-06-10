@@ -147,7 +147,25 @@ window.addEventListener('DOMContentLoaded', () => {
             const a = document.createElement('a');
             a.href = maybeInjectAffiliateTag(item.url); // Apply affiliate tag
             a.target = '_blank';
-            a.textContent = 'View'; // Or maybe the hostname? 'View' is consistent.
+            
+            try {
+              const urlObj = new URL(item.url);
+              let hostname = urlObj.hostname;
+              // Remove "www." prefix if present
+              if (hostname.startsWith('www.')) {
+                hostname = hostname.substring(4);
+              }
+              // Remove TLDs like .com, .co.uk, etc. to get just the domain name
+              const parts = hostname.split('.');
+              if (parts.length > 1) {
+                hostname = parts[0];
+              }
+              a.textContent = hostname.charAt(0).toUpperCase() + hostname.slice(1); // Capitalize first letter
+            } catch (e) {
+              a.textContent = 'View'; // Fallback to 'View' if URL is invalid
+            }
+            
+            a.style.fontStyle = 'italic'; // Apply italic format
             linkCell.appendChild(a);
         } else {
             linkCell.textContent = '-'; // Placeholder if no URL
