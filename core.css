@@ -118,7 +118,7 @@ th, td {
 /* Make the Link column slightly wider */
 table th:nth-child(2),
 table td:nth-child(2) {
-    width: 25%;
+    width: 12.5%; /* Adjusted to be about half of previous width, or slightly larger than original */
 }
 
 th {
@@ -406,6 +406,7 @@ body:not(.dark-mode) td {
 #share-container a {
     color: var(--user-text-color, var(--text-on-light)) !important;
     text-decoration: underline !important;
+    font-style: italic !important;
     position: relative;
 }
 
