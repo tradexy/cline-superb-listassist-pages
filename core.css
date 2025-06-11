@@ -136,11 +136,20 @@ p {
 
 a {
     color: #007bff;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
     color: #0056b3;
+}
+
+.item-copy-icon {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+td:hover .item-copy-icon {
+    opacity: 1;
 }
 
 /* Dark Mode Styles - Simple black/dark grey with white text */
@@ -400,7 +409,6 @@ body:not(.dark-mode) td {
 #share-container a {
     color: var(--user-text-color, var(--text-on-light)) !important;
     text-decoration: underline !important;
-    font-style: italic !important;
     position: relative;
 }
 
@@ -460,6 +468,3 @@ body.dark-mode .dark-mode-toggle {
     border-color: #666;
     color: #f1f1f1;
 }
-
-/* Rest of original CSS rules would follow here */
-/* [Previous CSS content would be properly formatted and included] */

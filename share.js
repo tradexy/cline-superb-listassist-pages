@@ -143,8 +143,9 @@ window.addEventListener('DOMContentLoaded', () => {
             a.href = maybeInjectAffiliateTag(item.url);
             a.textContent = item.name || 'Unnamed Item';
             
-            // Add copy icon after name (always visible)
+            // Add copy icon after name (visible on hover)
             const copyIconName = document.createElement('span');
+            copyIconName.classList.add('item-copy-icon'); /* Added class for styling */
             copyIconName.textContent = ' 📋'; // Space before emoji
             copyIconName.style.cursor = 'pointer';
             copyIconName.title = 'Copy link';
