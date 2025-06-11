@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
             
             // Add copy icon after name (always visible)
             const copyIconName = document.createElement('span');
-            copyIconName.textContent = ' 📋'; // Space before emoji
+            copyIconName.textContent = ' t3st'; // Space before emoji
             copyIconName.style.cursor = 'pointer';
             copyIconName.title = 'Copy link';
             copyIconName.onclick = async (e) => {
@@ -195,7 +195,7 @@ window.addEventListener('DOMContentLoaded', () => {
             
             // Add copy link icon (always visible with space)
             const copyIconLink = document.createElement('span');
-            copyIconLink.textContent = ' 📋'; // Space before emoji
+            copyIconLink.textContent = ' t3st'; // Space before emoji
             copyIconLink.style.cursor = 'pointer';
             copyIconLink.title = 'Copy link';
             copyIconLink.onclick = async (e) => {
