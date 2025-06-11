@@ -155,7 +155,7 @@ a:hover {
 }
 
 td:hover .item-copy-icon {
-    opacity: 1;
+    opacity: 1 !important; /* Added !important to ensure visibility on hover */
 }
 
 /* Dark Mode Styles - Simple black/dark grey with white text */
