@@ -118,7 +118,7 @@ th, td {
 /* Make the Link column slightly wider */
 table th:nth-child(2),
 table td:nth-child(2) {
-    width: 12.5%; /* Adjusted to be about half of previous width, or slightly larger than original */
+    width: 5%; /* Adjusted to be about half of previous width, or slightly larger than original */
 }
 
 th {
