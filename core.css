@@ -402,9 +402,15 @@ body:not(.dark-mode) td {
     text-decoration: underline !important;
     font-style: italic !important;
     position: relative;
-    padding-right: 24px;
 }
 
+#share-container a::after {
+    font-style: normal;
+}
+
+#share-container a:hover::after {
+    opacity: 1;
+}
 
 /* Theme-aware hover states */
 body:not(.dark-mode) tr:hover {
