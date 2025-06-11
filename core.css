@@ -149,6 +149,15 @@ a:hover {
     color: #0056b3;
 }
 
+.item-copy-icon {
+    opacity: 0 !important; /* Added !important to ensure it's hidden by default */
+    transition: opacity 0.2s;
+}
+
+td:hover .item-copy-icon {
+    opacity: 1;
+}
+
 /* Dark Mode Styles - Simple black/dark grey with white text */
 body.dark-mode {
     background-color: #121212 !important;
