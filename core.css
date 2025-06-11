@@ -115,6 +115,12 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
+/* Make the Link column slightly wider */
+table th:nth-child(2),
+table td:nth-child(2) {
+    width: 25%;
+}
+
 th {
     background-color: #f8f9fa;
     font-weight: bold;
@@ -141,15 +147,6 @@ a {
 
 a:hover {
     color: #0056b3;
-}
-
-.item-copy-icon {
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-td:hover .item-copy-icon {
-    opacity: 1;
 }
 
 /* Dark Mode Styles - Simple black/dark grey with white text */
@@ -468,3 +465,6 @@ body.dark-mode .dark-mode-toggle {
     border-color: #666;
     color: #f1f1f1;
 }
+
+/* Rest of original CSS rules would follow here */
+/* [Previous CSS content would be properly formatted and included] */
