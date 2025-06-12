@@ -57,6 +57,31 @@ function applyDarkMode(isDark) {
     }
 }
 
+// Function to update Open Graph meta tags
+function updateOpenGraphTags(payload) {
+    const head = document.head;
+    const listName = payload.name || 'Shared List';
+    const listDescription = payload.subtitle?.text || 'Check out this shopping list created with List Assist!';
+    const listImage = payload.subtitle?.imageUrl || 'https://tradexy.github.io/cline-superb-listassist-pages/GoodListLogo-128x128.png'; // Default image
+
+    // Remove existing OG tags to prevent duplicates if script runs multiple times (unlikely for share.html)
+    document.querySelectorAll('meta[property^="og:"]').forEach(meta => meta.remove());
+
+    const createMeta = (property, content) => {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        meta.setAttribute('content', content);
+        head.appendChild(meta);
+    };
+
+    createMeta('og:title', listName);
+    createMeta('og:description', listDescription);
+    createMeta('og:image', listImage);
+    createMeta('og:url', window.location.href);
+    createMeta('og:type', 'website'); // Or 'article' if more appropriate for a list of items
+    createMeta('og:site_name', 'List Assist');
+}
+
 // --- Main Logic ---
 window.addEventListener('DOMContentLoaded', () => {
     const titleEl = document.getElementById('title');
