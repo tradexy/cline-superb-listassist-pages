@@ -100,19 +100,54 @@ window.addEventListener('DOMContentLoaded', () => {
     applyDarkMode(isDarkMode);
     applyThemeSettings(theme, defaultTheme); // Apply theme from payload
 
+    // Define size maps (copied from theme_controls.js)
+    const textSizeMap = {
+      '1': '0.9em',
+      '2': '1.1em',
+      '3': '1.3em',
+      '4': '1.5em',
+      '5': '1.7em'
+    };
+
+    const imageSizeMap = {
+      '1': '100px',
+      '2': '150px',
+      '3': '200px',
+      '4': '250px',
+      '5': '300px'
+    };
+
+    // Apply size settings from payload
+    const subtitleSettings = payload.subtitle || {};
+    const root = document.documentElement;
+    const subtitleContentEl = document.getElementById('subtitleContent');
+    const subtitleImageEl = document.getElementById('subtitleImage');
+
+    const subtitleFontSize = textSizeMap[subtitleSettings.textSize] || textSizeMap['2'];
+    root.style.setProperty('--subtitle-font-size', subtitleFontSize);
+    subtitleContentEl.style.fontSize = subtitleFontSize;
+
+    const baseSize = parseFloat(subtitleFontSize);
+    const titleFontSize = `${baseSize + 0.3}em`;
+    root.style.setProperty('--title-font-size', titleFontSize);
+    titleEl.style.fontSize = titleFontSize; // Apply to main title
+
+    const imageMaxHeight = imageSizeMap[subtitleSettings.imageSize] || imageSizeMap['2'];
+    root.style.setProperty('--image-max-height', imageMaxHeight);
+    subtitleImageEl.style.maxHeight = imageMaxHeight; // Apply to image
+
     // 3) Set title and subtitle
     titleEl.textContent = payload.name || 'Shared List';
     document.title = `List Assist – Shared: ${payload.name || 'List'}`; // Update page title too
     
     // Handle subtitle and image
     const subtitleBox = document.getElementById('subtitleBox');
-    const subtitleContent = document.getElementById('subtitleContent');
-    const subtitleImage = document.getElementById('subtitleImage');
+    // subtitleContent and subtitleImage already defined above
     
     if (payload.subtitle?.text || payload.subtitle?.imageUrl) {
         subtitleBox.style.display = 'block';
         subtitleContent.textContent = payload.subtitle.text || '';
-        subtitleContent.style.fontSize = '1.2em';
+        // subtitleContent.style.fontSize is now handled by CSS variable
         subtitleContent.style.lineHeight = '1.5';
         subtitleBox.className = `subtitle-box ${payload.subtitle.alignment || 'left'}`;
         
@@ -121,6 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
             subtitleImage.style.display = 'block';
             subtitleImage.style.marginLeft = payload.subtitle.imageAlignment === 'left' ? '0' : 'auto';
             subtitleImage.style.marginRight = payload.subtitle.imageAlignment === 'right' ? '0' : 'auto';
+            // subtitleImage.style.maxHeight is now handled by CSS variable
             subtitleImage.onerror = () => {
                 subtitleImage.style.display = 'none';
             };

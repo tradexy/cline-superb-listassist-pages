@@ -53,6 +53,9 @@ body {
     --user-bg-color: #ffffff;
     --user-text-color: #333333;
     --user-font-family: Arial, sans-serif;
+    --subtitle-font-size: 1.1em; /* Default for text size 2 */
+    --title-font-size: 1.4em; /* Default for text size 2 + 0.3em */
+    --image-max-height: 150px; /* Default for image size 2 */
 }
 
 .text-box {
@@ -78,8 +81,19 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     display: none;
-    font-size: 1.1em;
     line-height: 1.4;
+}
+
+#subtitleContent {
+    font-size: var(--subtitle-font-size);
+}
+
+#listTitle {
+    font-size: var(--title-font-size);
+}
+
+#subtitleBox img {
+    max-height: var(--image-max-height);
 }
 
 .subtitle-box.left {
@@ -118,7 +132,7 @@ th, td {
 /* Make the Link column slightly wider */
 table th:nth-child(2),
 table td:nth-child(2) {
-    width: 8%; /* Adjusted to be about half of previous width, or slightly larger than original */
+    width: 10%; /* Adjusted to be about half of previous width, or slightly larger than original */
 }
 
 th {
