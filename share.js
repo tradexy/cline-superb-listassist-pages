@@ -277,12 +277,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const copyListLinkBtn = document.getElementById('copyListLinkBtn');
     if (copyListLinkBtn) {
         copyListLinkBtn.addEventListener('click', async () => {
-            const listName = payload.name || 'Shared List';
-            const shareUrl = window.location.href;
-            const textToCopy = `Click here to see '${listName}': ${shareUrl}`;
+            const shareUrl = window.location.href; // Get the full URL
             
             try {
-                await navigator.clipboard.writeText(textToCopy);
+                await navigator.clipboard.writeText(shareUrl); // Copy only the URL
                 copyListLinkBtn.textContent = 'Copied!';
                 setTimeout(() => copyListLinkBtn.textContent = 'Copy List Link', 2000);
             } catch (err) {
