@@ -102,19 +102,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Define size maps (copied from theme_controls.js)
     const textSizeMap = {
-      '1': '0.9em',
+      '1': '0.8em',
       '2': '1.1em',
-      '3': '1.3em',
-      '4': '1.5em',
-      '5': '1.7em'
+      '3': '1.7em',
+      '4': '3.0em',
+      '5': '5.0em'
     };
 
     const imageSizeMap = {
-      '1': '100px',
+      '1': '80px',
       '2': '150px',
-      '3': '200px',
-      '4': '250px',
-      '5': '300px'
+      '3': '250px',
+      '4': '400px',
+      '5': '700px'
     };
 
     // Apply size settings from payload
