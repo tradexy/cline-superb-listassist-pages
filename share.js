@@ -1,4 +1,5 @@
 // share.js - Renders a shared list with theme support
+import { generateIcsFile, downloadIcsFile } from './calendar_export.js'; // NEW: Import calendar functions
 
 // --- Helper Functions ---
 
@@ -291,6 +292,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.error('Failed to copy list link: ', err);
                 alert('Failed to copy link. Please try again or copy from address bar.');
             }
+        });
+    }
+
+    // Add to Calendar button functionality
+    const addCalendarBtn = document.getElementById('addCalendarBtn');
+    if (addCalendarBtn) {
+        addCalendarBtn.addEventListener('click', async () => {
+            const listName = payload.name || 'Shared List';
+            const listUrl = window.location.href; // The current shared URL is the short URL
+
+            const icsContent = generateIcsFile(listName, listUrl);
+            const fileName = `${listName.replace(/[^a-z0-9]/gi, '_')}.ics`;
+            downloadIcsFile(icsContent, fileName);
+
+            addCalendarBtn.textContent = 'Added!';
+            setTimeout(() => addCalendarBtn.textContent = '📅 Add to Calendar', 2000);
         });
     }
 });
