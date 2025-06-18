@@ -178,6 +178,8 @@ window.addEventListener('DOMContentLoaded', () => {
             const a = document.createElement('a');
             a.href = maybeInjectAffiliateTag(item.url);
             a.textContent = item.name || 'Unnamed Item';
+            a.target = '_blank'; // Open in new tab
+            a.rel = 'noopener noreferrer'; // Security best practice
             
             // Add copy icon after name (visible on hover)
             const copyIconName = document.createElement('span');
@@ -212,6 +214,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (item.url) {
             const a = document.createElement('a');
             a.href = maybeInjectAffiliateTag(item.url); // Apply affiliate tag
+            a.target = '_blank'; // Open in new tab
+            a.rel = 'noopener noreferrer'; // Security best practice
             
             try {
               const urlObj = new URL(item.url);
