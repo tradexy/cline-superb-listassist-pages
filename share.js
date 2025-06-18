@@ -1,5 +1,4 @@
 // share.js - Renders a shared list with theme support
-import { generateIcsFile, downloadIcsFile } from './calendar_export.js'; // NEW: Import calendar functions
 
 // --- Helper Functions ---
 
@@ -311,3 +310,86 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/**
+ * Generates an iCalendar (.ics) file content for a given shopping list.
+ * @param {string} listName - The name of the shopping list.
+ * @param {string} listUrl - The short URL of the shopping list.
+ * @returns {string} The iCalendar file content.
+ */
+function generateIcsFile(listName, listUrl) {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    // DTSTAMP and UID should be unique and consistent
+    const dtStamp = `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+    const uid = `${dtStamp}-${Math.random().toString(36).substring(2)}@listassist.com`;
+
+    // Event start and end times (e.g., 1 hour from now, or just a single point in time)
+    // For simplicity, let's make it a 1-hour event starting now.
+    const startTime = dtStamp; // Using current time as start
+    const endTime = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour later
+    const endYear = endTime.getFullYear();
+    const endMonth = (endTime.getMonth() + 1).toString().padStart(2, '0');
+    const endDay = endTime.getDate().toString().padStart(2, '0');
+    const endHours = endTime.getHours().toString().padStart(2, '0');
+    const endMinutes = endTime.getMinutes().toString().padStart(2, '0');
+    const endSeconds = endTime.getSeconds().toString().padStart(2, '0');
+    const dtEnd = `${endYear}${endMonth}${endDay}T${endHours}${endMinutes}${endSeconds}Z`;
+
+    // Description can include the list URL
+    const description = `Your List Assist shopping list: ${listUrl}\n\nView your list here: ${listUrl}`;
+
+    // Summary is the event title
+    const summary = `List Assist: ${listName}`;
+
+    // Timezone information (using UTC for simplicity, as calendars handle conversion)
+    const timeZone = 'UTC'; // Default to UTC
+
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//List Assist//Shopping List v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:${timeZone}
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:${dtStamp}
+UID:${uid}
+DTSTART:${startTime}
+DTEND:${dtEnd}
+SUMMARY:${summary}
+DESCRIPTION:${description}
+LOCATION:${listUrl}
+END:VEVENT
+END:VCALENDAR`;
+
+    return icsContent;
+}
+
+/**
+ * Downloads the generated iCalendar file.
+ * @param {string} icsContent - The iCalendar file content.
+ * @param {string} fileName - The desired file name (e.g., "My Shopping List.ics").
+ */
+function downloadIcsFile(icsContent, fileName) {
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url); // Clean up the URL object
+}
