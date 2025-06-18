@@ -169,6 +169,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // 4) Render items into the table
     listBodyEl.innerHTML = ''; // Clear any potential placeholder
+
+    const tableHeaderRow = document.querySelector('#share-table thead tr'); // Get the header row
+    // Clear existing headers (except for Item, Link)
+    while (tableHeaderRow.children.length > 2) {
+        tableHeaderRow.removeChild(tableHeaderRow.children[tableHeaderRow.children.length - 1]);
+    }
+
+    const customColumns = payload.customColumns || []; // Get custom columns from payload
+
+    // Add custom column headers
+    customColumns.forEach(col => {
+        const th = document.createElement('th');
+        th.textContent = col.name;
+        tableHeaderRow.appendChild(th);
+    });
+
     (payload.items || []).forEach(item => {
         const tr = document.createElement('tr');
 
@@ -261,6 +277,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         tr.appendChild(linkCell);
 
+        // Add cells for custom columns
+        customColumns.forEach(col => {
+            const customCell = document.createElement('td');
+            customCell.textContent = item.customColumns ? item.customColumns[col.id] || '' : ''; // Display custom data
+            tr.appendChild(customCell);
+        });
+
         listBodyEl.appendChild(tr);
     });
 
@@ -268,7 +291,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!payload.items || payload.items.length === 0) {
         const tr = document.createElement('tr');
         const td = document.createElement('td');
-        td.colSpan = 2; // Span across Item and Link columns
+        // Adjust colSpan based on number of custom columns
+        td.colSpan = 2 + customColumns.length; 
         td.textContent = 'This shared list is empty.';
         td.style.textAlign = 'center';
         td.style.fontStyle = 'italic';

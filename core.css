@@ -490,5 +490,163 @@ body.dark-mode .dark-mode-toggle {
     color: #f1f1f1;
 }
 
-/* Rest of original CSS rules would follow here */
-/* [Previous CSS content would be properly formatted and included] */
+/* Custom Columns Section Styling */
+.custom-columns-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.custom-columns-section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--user-text-color);
+}
+
+.custom-column-input-group {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.custom-column-input-group input[type="text"] {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: var(--user-bg-color);
+    color: var(--user-text-color);
+}
+
+.custom-column-input-group button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custom-column-input-group button:hover {
+    background-color: #0056b3;
+}
+
+.custom-columns-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-columns-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.custom-columns-list li:last-child {
+    border-bottom: none;
+}
+
+.custom-columns-list li button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custom-columns-list li button:hover {
+    background-color: #5a6268;
+}
+
+/* Styling for custom column inputs in the main form */
+.custom-input-group {
+    margin-bottom: 10px;
+}
+
+.custom-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--user-text-color);
+}
+
+.custom-input-group input[type="text"] {
+    width: calc(100% - 18px); /* Adjust for padding and border */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: var(--user-bg-color);
+    color: var(--user-text-color);
+}
+
+/* Responsive table styling for custom columns */
+/* Ensure table is scrollable horizontally if content overflows */
+.table-box {
+    overflow-x: auto;
+}
+
+/* Optional: Add min-width to table to prevent extreme squishing */
+table {
+    min-width: 300px; /* Adjust as needed */
+}
+
+/* Adjust column widths for better display with more columns */
+table th, table td {
+    white-space: nowrap; /* Prevent text wrapping in cells */
+}
+
+/* Adjust default column widths if necessary */
+table th:nth-child(1), /* Item column */
+table td:nth-child(1) {
+    width: 40%; /* Give more space to item name */
+}
+
+table th:nth-child(2), /* Link column */
+table td:nth-child(2) {
+    width: 20%; /* Adjust link column width */
+}
+
+table th:last-child, /* Actions column */
+table td:last-child {
+    width: 20%; /* Adjust actions column width */
+}
+
+/* Styles for dynamically added custom columns */
+table th:nth-child(n+3):not(:last-child), /* All th from 3rd to second-to-last */
+table td:nth-child(n+3):not(:last-child) { /* All td from 3rd to second-to-last */
+    width: 15%; /* Example width for custom columns */
+}
+
+/* Dark mode overrides for new elements */
+body.dark-mode .custom-column-input-group input[type="text"],
+body.dark-mode .custom-input-group input[type="text"] {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .custom-column-input-group button,
+body.dark-mode .custom-columns-list li button {
+    background-color: #333 !important;
+    color: #ffffff !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .custom-column-input-group button:hover,
+body.dark-mode .custom-columns-list li button:hover {
+    background-color: #444 !important;
+}
+
+body.dark-mode .custom-columns-list li {
+    border-bottom-color: #333 !important;
+}
+
+body.dark-mode .custom-columns-section h3,
+body.dark-mode .custom-input-group label {
+    color: #ffffff !important;
+}
